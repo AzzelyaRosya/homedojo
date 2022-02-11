@@ -58,7 +58,7 @@ const Isi = () => {
                   </Grid>
 
                   <Grid item style={{ display: 'flex', flexDirection: 'column' }}>
-                    <Typography sx={{ cursor: 'pointer', color: '#F78104', fontSize: '18px', fontWeight: 'bold' }} variant="body2">
+                    <Typography sx={{ cursor: 'pointer', color: '#F78104', fontSize: '18px', fontWeight: 'bold', mb: 2 }} variant="body2">
                       {data.harga}
                       {/* <FormControlLabel sx={{ ml: 20, mt: -6 }} control={<Checkbox defaultChecked />} label="" /> */}
                     </Typography>

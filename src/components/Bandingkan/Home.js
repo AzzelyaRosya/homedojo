@@ -1,20 +1,22 @@
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box, Tabs, Tab, Button, OutlinedInput, MenuItem, FormControl, Select, IconButton, Grid, InputAdornment, Container, TextField } from '@mui/material';
+import PropTypes from 'prop-types';
+import { Box, Tabs, Tab, Button, OutlinedInput, MenuItem, FormControl, Select, IconButton, Grid, InputAdornment, Container, TextField, Typography, ListItemIcon, ListItemText } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
-// import component
 import Search from './Search';
 import Isi from './Isi';
 import Coba from './Coba';
+
+// import lagi
+import Terdekat from '../Terdekat/Terdekat';
+import Terpopuler from '../Terpopuler/Terpopuler';
+import Peta from '../Peta/Peta';
 
 // icon
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import AddLocationIcon from '@mui/icons-material/AddLocation';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import SearchIcon from '@mui/icons-material/Search';
-import TuneIcon from '@mui/icons-material/Tune';
 
 // punya expand
 const ITEM_HEIGHT = 48;
@@ -30,13 +32,34 @@ const MenuProps = {
 
 const names = ['Bekasi, Jawa Barat', 'Jakarta, DKI Jakarta', 'Semarang, Jawa Tengah', 'Surabaya, Jawa Timur', 'Yogyakarta, Jawa Tengah', 'Cirebon, Jawa Barat', 'Bandung, Jawa Barat'];
 
-function getStyles(name, personName, theme) {
+// punya tabs
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
   return {
-    fontWeight: personName.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium,
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
   };
 }
 
-// punya tabs
 const StyledTabs = styled((props) => <Tabs {...props} TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }} />)({
   '& .MuiTabs-indicator': {
     display: 'flex',
@@ -44,8 +67,8 @@ const StyledTabs = styled((props) => <Tabs {...props} TabIndicatorProps={{ child
     backgroundColor: 'transparent',
   },
   '& .MuiTabs-indicatorSpan': {
-    maxWidth: 50,
-    width: '90%',
+    maxWidth: 100,
+    width: '100%',
     backgroundColor: '#249EA0',
   },
 });
@@ -68,7 +91,7 @@ export default function Home() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
-  const onTabClicked = (event, newValue) => {
+  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
@@ -76,7 +99,7 @@ export default function Home() {
 
   const [kota, setPersonName] = React.useState([]);
 
-  const handleChange = (event) => {
+  const onTabClicked = (event) => {
     const {
       target: { value },
     } = event;
@@ -92,64 +115,66 @@ export default function Home() {
       <Search />
 
       {/* tabs */}
+
       <Box sx={{ width: '100%', mt: 3, fontWeight: 'bold' }}>
-        <StyledTabs value={value} onChange={onTabClicked} aria-label="styled tabs example" centered>
-          <StyledTab value="one" label="Terdekat" />
-          <StyledTab value="two" label="Terpopuler" />
-          <StyledTab value="three" label="Bandingkan" />
-          <StyledTab value="four" label="Peta" />
+        <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example" centered>
+          <StyledTab label="Terdekat" {...a11yProps(0)} />
+          <StyledTab label="Terpopuler" {...a11yProps(1)} />
+          <StyledTab label="Bandingkan" {...a11yProps(2)} />
+          <StyledTab label="Peta" {...a11yProps(3)} />
         </StyledTabs>
         <Box sx={{ p: 3 }} />
       </Box>
-      {/* <Box>
-        <Tabs value={value} onChange={onTabClicked} textColor="primary" indicatorColor="primary" aria-label="primary tabs example" centered>
-          <Tab style={{ color: '#249EA0' }} value="one" label="Terdekat" />
-          <Tab style={{ color: '#249EA0' }} value="two" label="Terpopuler" />
-          <Tab style={{ color: '#249EA0' }} value="three" label="Bandingkan" />
-          <Tab style={{ color: '#249EA0' }} value="four" label="Peta" />
-        </Tabs>
-      </Box> */}
 
-      {/* expand */}
+      <TabPanel value={value} index={0}>
+        Terdekat
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Terpopuler
+      </TabPanel>
 
-      <Container>
-        <Box sx={{ mt: -6, mb: 3 }}>
+      <TabPanel value={value} index={2}>
+        {/* expand */}
+
+        <Box sx={{ mt: -10, mb: 1 }}>
           <Grid container direction="row" alignItems={'center'} justifyContent={'center'}>
             <FormControl
               sx={{
                 p: 2,
                 m: 1,
                 mt: 3,
-                width: '50%',
+                maxWidth: 700,
+                width: '80%',
                 '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-                  border: 'solid #cccccc',
+                  border: 'solid #eeeeee',
                   borderRadius: 9,
                 },
                 '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#cccccc',
+                  borderColor: '#eeeeee',
                 },
                 '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#cccccc',
+                  borderColor: '#eeeeee',
                 },
               }}
             >
               <Select
+                IconComponent={ExpandMoreIcon}
                 sx={{
-                  borderColor: '#cccccc',
+                  borderColor: '#eeeeee',
                   borderRadius: 9,
-                  bgcolor: '#f2f2f2',
+                  bgcolor: '#f5f5f5',
                   borderRadius: 9,
                 }}
                 displayEmpty
                 value={kota}
-                onChange={handleChange}
+                onChange={onTabClicked}
                 input={<OutlinedInput />}
                 renderValue={(selected) => {
                   if (selected.length === 0) {
                     return (
                       <div style={{ display: 'flex', alignItems: 'center' }}>
                         <IconButton>
-                          <AddLocationIcon sx={{ mr: 1, color: ' #F78104' }} />
+                          <box-icon type="solid" name="map" color="orange"></box-icon>
                         </IconButton>
                         <em style={{ color: 'grey' }}>Temukan Kota</em>
                       </div>
@@ -165,8 +190,11 @@ export default function Home() {
                   <em>Search Place</em>
                 </MenuItem>
                 {names.map((name) => (
-                  <MenuItem key={name} value={name} style={getStyles(name, kota, theme)}>
-                    {name}
+                  <MenuItem key={name} value={name} sx={{ mr: 10 }}>
+                    <ListItemIcon>
+                      <AddLocationIcon />
+                      <ListItemText primary={name} />
+                    </ListItemIcon>
                   </MenuItem>
                 ))}
               </Select>
@@ -177,31 +205,35 @@ export default function Home() {
             </IconButton>
           </Grid>
         </Box>
-      </Container>
 
-      {/* Isi */}
-      <Isi />
+        {/* Isi */}
+        <Isi />
 
-      {/* Button */}
-      <Box sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1, bgcolor: 'warning' }}>
-        <Grid container justifyContent="right">
-          <Grid item align="right">
-            <Button
-              variant="contained"
-              color="warning"
-              sx={{
-                mt: 2,
-                mr: 2,
-                borderRadius: '50%',
-              }}
-            >
-              <IconButton sx={{ color: 'white', height: 60 }}>
-                <ArrowForwardIcon />
-              </IconButton>
-            </Button>
+        {/* Button */}
+        <Box fixed sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1, bgcolor: 'warning' }}>
+          <Grid container justifyContent="right">
+            <Grid item align="right">
+              <Button
+                variant="contained"
+                color="warning"
+                sx={{
+                  mt: 2,
+                  mr: 2,
+                  borderRadius: '50%',
+                }}
+              >
+                <IconButton sx={{ color: 'white', height: 60 }}>
+                  <ArrowForwardIcon />
+                </IconButton>
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      </TabPanel>
+
+      <TabPanel value={value} index={3}>
+        Peta
+      </TabPanel>
       {/* <Coba /> */}
     </>
   );
