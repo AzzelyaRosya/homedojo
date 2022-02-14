@@ -1,7 +1,7 @@
-import hotel1 from '../../img/hotel1.jpg';
-import hotel2 from '../../img/hotel2.jpg';
-import hotel3 from '../../img/hotel3.jpg';
-import hotel4 from '../../img/hotel4.jpg';
+import hotel1 from '../img/hotel1.jpg';
+import hotel2 from '../img/hotel2.jpg';
+import hotel3 from '../img/hotel3.jpg';
+import hotel4 from '../img/hotel4.jpg';
 
 const lotsOfData = [
   {

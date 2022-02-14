@@ -3,14 +3,9 @@ import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import { Box, Tabs, Tab, Button, OutlinedInput, MenuItem, FormControl, Select, IconButton, Grid, InputAdornment, Container, TextField, Typography, ListItemIcon, ListItemText } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Search from './Search';
-import Isi from './Isi';
-import Coba from './Coba';
-
-// import lagi
-import Terdekat from '../Terdekat/Terdekat';
-import Terpopuler from '../Terpopuler/Terpopuler';
-import Peta from '../Peta/Peta';
+import Search from '../components/Search';
+import Isi from '../components/Isi';
+import Coba from '../components/Coba';
 
 // icon
 import MyLocationIcon from '@mui/icons-material/MyLocation';
@@ -25,7 +20,7 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      width: 300,
     },
   },
 };
@@ -116,8 +111,8 @@ export default function Home() {
 
       {/* tabs */}
 
-      <Box sx={{ width: '100%', mt: 3, fontWeight: 'bold' }}>
-        <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example" centered>
+      <Box sx={{ mt: 3, fontWeight: 'bold' }}>
+        <StyledTabs value={value} onChange={handleChange} variant="fullWidth" aria-label="full width tabs example" centered>
           <StyledTab label="Terdekat" {...a11yProps(0)} />
           <StyledTab label="Terpopuler" {...a11yProps(1)} />
           <StyledTab label="Bandingkan" {...a11yProps(2)} />
@@ -127,7 +122,8 @@ export default function Home() {
       </Box>
 
       <TabPanel value={value} index={0}>
-        Terdekat
+        <Isi />
+        {/* <Coba /> */}
       </TabPanel>
       <TabPanel value={value} index={1}>
         Terpopuler
@@ -137,16 +133,15 @@ export default function Home() {
         {/* expand */}
 
         <Box sx={{ mt: -10, mb: 1 }}>
-          <Grid container direction="row" alignItems={'center'} justifyContent={'center'}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <FormControl
               sx={{
-                p: 2,
                 m: 1,
                 mt: 3,
-                maxWidth: 700,
-                width: '80%',
+
+                width: '90%',
                 '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-                  border: 'solid #eeeeee',
+                  border: 'none',
                   borderRadius: 9,
                 },
                 '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
@@ -158,12 +153,10 @@ export default function Home() {
               }}
             >
               <Select
-                IconComponent={ExpandMoreIcon}
                 sx={{
                   borderColor: '#eeeeee',
                   borderRadius: 9,
                   bgcolor: '#f5f5f5',
-                  borderRadius: 9,
                 }}
                 displayEmpty
                 value={kota}
@@ -191,10 +184,8 @@ export default function Home() {
                 </MenuItem>
                 {names.map((name) => (
                   <MenuItem key={name} value={name} sx={{ mr: 10 }}>
-                    <ListItemIcon>
-                      <AddLocationIcon />
-                      <ListItemText primary={name} />
-                    </ListItemIcon>
+                    <box-icon type="solid" name="map" color="orange"></box-icon>
+                    {name}
                   </MenuItem>
                 ))}
               </Select>
@@ -203,7 +194,7 @@ export default function Home() {
             <IconButton>
               <MyLocationIcon sx={{ fontSize: 30, color: '#000', mt: 1 }} />
             </IconButton>
-          </Grid>
+          </div>
         </Box>
 
         {/* Isi */}
@@ -234,7 +225,6 @@ export default function Home() {
       <TabPanel value={value} index={3}>
         Peta
       </TabPanel>
-      {/* <Coba /> */}
     </>
   );
 }

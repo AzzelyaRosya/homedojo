@@ -1,7 +1,7 @@
-import Terdekat from './components/Terdekat/Terdekat';
-import Terpopuler from './components/Terpopuler/Terpopuler';
-import Home from './components/Bandingkan/Home';
-import Peta from './components/Peta/Peta';
+import Terdekat from './pages/Terdekat';
+import Terpopuler from './pages/Terpopuler';
+import Bandingkan from './pages/Bandingkan';
+import Peta from './pages/Peta';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Home />
+        <Bandingkan />
       </div>
     </Router>
   );

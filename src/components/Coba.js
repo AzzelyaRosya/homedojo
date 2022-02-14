@@ -31,7 +31,7 @@ const Isi = () => {
                 <ButtonBase
                   sx={{ width: 200, height: 200 }}
                   style={{
-                    //border radius style
+                    //border radius img
                     borderBottomLeftRadius: 10,
                     borderBottomRightRadius: 10,
                     borderTopRightRadius: 10,
@@ -44,33 +44,47 @@ const Isi = () => {
               </Grid>
               <Grid item xs={12} sm container>
                 <Grid item xs container direction="column" spacing={2}>
-                  <Grid item xs>
-                    <Typography gutterBottom variant="subtitle1" component="div" sx={{ fontWeight: 'bold' }}>
-                      {data.nama}
-                    </Typography>
-                    <Typography sx={{ fontSize: '13px' }} variant="body2" gutterBottom color="text.secondary">
+                  <Grid item xs container direction="row">
+                    {/* Judul */}
+                    <Grid item xs>
+                      <Typography gutterBottom variant="subtitle1" component="div" sx={{ fontWeight: 'bold', fontSize: '19px' }}>
+                        {data.nama}
+                      </Typography>
+                    </Grid>
+
+                    {/* Harga */}
+                    <Grid item>
+                      <Typography variant="subtitle1" component="div" sx={{ fontSize: '15px', fontWeight: 'bold' }}>
+                        <IconButton sx={{ fontSize: '8px', color: 'orange' }}>
+                          <StarIcon />
+                        </IconButton>
+                        {data.rating}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+
+                  <Grid item>
+                    <Typography sx={{ fontSize: '14px', mt: -3 }} variant="body2" gutterBottom color="text.secondary">
                       {data.desc}
                     </Typography>
-
-                    <Typography sx={{ color: ' #249EA0', fontWeight: 'bold', mt: 2 }} variant="body2">
+                    <Typography sx={{ color: ' #249EA0', fontWeight: 'bold', mt: 3, fontSize: '16px' }} variant="body2">
                       {data.pelatih}
                     </Typography>
                   </Grid>
 
-                  <Grid item style={{ display: 'flex', flexDirection: 'column' }}>
-                    <Typography sx={{ cursor: 'pointer', color: '#F78104', fontSize: '18px', fontWeight: 'bold', mb: 2 }} variant="body2">
-                      {data.harga}
-                      {/* <FormControlLabel sx={{ ml: 20, mt: -6 }} control={<Checkbox defaultChecked />} label="" /> */}
-                    </Typography>
+                  <Grid item xs container direction="row">
+                    <Grid item xs>
+                      <Typography flexDirection={'row'} sx={{ cursor: 'pointer', color: '#F78104', fontSize: '21px', fontWeight: 'bold', mt: 2 }} variant="body2">
+                        {data.harga}
+                      </Typography>
+                    </Grid>
+
+                    <Grid item>
+                      <Typography variant="subtitle1" component="div" sx={{ fontSize: '15px', fontWeight: 'bold' }}>
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="" />
+                      </Typography>
+                    </Grid>
                   </Grid>
-                </Grid>
-                <Grid item>
-                  <Typography variant="subtitle1" component="div" sx={{ fontSize: '15px', fontWeight: 'bold', mr: 2 }}>
-                    <IconButton sx={{ fontSize: '8px', color: 'orange' }}>
-                      <StarIcon />
-                    </IconButton>
-                    {data.rating}
-                  </Typography>
                 </Grid>
               </Grid>
             </Grid>
