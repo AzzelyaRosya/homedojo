@@ -5,6 +5,8 @@ import { Box, Tabs, Tab, Button, OutlinedInput, MenuItem, FormControl, Select, I
 import { styled } from '@mui/material/styles';
 import Search from '../components/Search';
 import Isi from '../components/Isi';
+import Terdekat from './Terdekat';
+import Terpopuler from './Terpopuler';
 import Coba from '../components/Coba';
 
 // icon
@@ -122,11 +124,10 @@ export default function Home() {
       </Box>
 
       <TabPanel value={value} index={0}>
-        <Isi />
-        {/* <Coba /> */}
+        <Terdekat />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Terpopuler
+        <Terpopuler />
       </TabPanel>
 
       <TabPanel value={value} index={2}>
@@ -184,7 +185,7 @@ export default function Home() {
                 </MenuItem>
                 {names.map((name) => (
                   <MenuItem key={name} value={name} sx={{ mr: 10 }}>
-                    <box-icon type="solid" name="map" color="orange"></box-icon>
+                    <box-icon {...name.toLowerCase()} type="solid" name="map" color="orange"></box-icon>
                     {name}
                   </MenuItem>
                 ))}
@@ -223,7 +224,7 @@ export default function Home() {
       </TabPanel>
 
       <TabPanel value={value} index={3}>
-        Peta
+        <Coba />
       </TabPanel>
     </>
   );
