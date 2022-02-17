@@ -8,6 +8,7 @@ import Isi from '../components/Isi';
 import Terdekat from './Terdekat';
 import Terpopuler from './Terpopuler';
 import Coba from '../components/Coba';
+import Coba2 from '../components/Coba2';
 
 // icon
 import MyLocationIcon from '@mui/icons-material/MyLocation';
@@ -225,6 +226,7 @@ export default function Home() {
 
       <TabPanel value={value} index={3}>
         <Coba />
+        <Coba2 />
       </TabPanel>
     </>
   );

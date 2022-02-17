@@ -182,35 +182,42 @@ export default function UnstyledSelectRichOptions() {
     );
   };
   return (
-    <FormControl
-      sx={{
-        m: 1,
-        mt: 3,
+    <Box sx={{ mt: -10, mb: 1 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <FormControl
+          sx={{
+            m: 1,
+            mt: 3,
 
-        width: '90%',
-        '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-          border: 'none',
-          borderRadius: 9,
-        },
-        '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-          borderColor: '#eeeeee',
-        },
-        '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-          borderColor: '#eeeeee',
-        },
-      }}
-    >
-      <CustomSelect>
-        {names.map((name) => (
-          <StyledOption key={name} value={name} MenuProps={MenuProps} inputProps={{ 'aria-label': 'Without label' }}>
-            <IconButton>
-              <box-icon type="solid" name="map" color="orange"></box-icon>
-            </IconButton>
-            {name}
-          </StyledOption>
-        ))}
-      </CustomSelect>
-    </FormControl>
+            width: '90%',
+            '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+              border: 'none',
+              borderRadius: 9,
+            },
+            '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#eeeeee',
+            },
+            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#eeeeee',
+            },
+          }}
+        >
+          <CustomSelect>
+            {names.map((name) => (
+              <StyledOption key={name} value={name} MenuProps={MenuProps} inputProps={{ 'aria-label': 'Without label' }}>
+                <IconButton>
+                  <box-icon type="solid" name="map" color="orange"></box-icon>
+                </IconButton>
+                {name}
+              </StyledOption>
+            ))}
+          </CustomSelect>
+        </FormControl>
+        <IconButton>
+          <MyLocationIcon sx={{ fontSize: 30, color: '#000', mt: 1 }} />
+        </IconButton>
+      </div>
+    </Box>
   );
 }
 const names = ['Bekasi, Jawa Barat', 'Jakarta, DKI Jakarta', 'Semarang, Jawa Tengah', 'Surabaya, Jawa Timur', 'Yogyakarta, Jawa Tengah', 'Cirebon, Jawa Barat', 'Bandung, Jawa Barat'];

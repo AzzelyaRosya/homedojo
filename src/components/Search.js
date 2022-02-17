@@ -7,7 +7,15 @@ import SearchIcon from '@mui/icons-material/Search';
 export default function Search() {
   return (
     <>
-      <Box sx={{ borderRadius: 2, p: 3 }} style={{ backgroundColor: '#249EA0' }}>
+      <Box
+        sx={{ p: 3 }}
+        style={{
+          backgroundColor: '#249EA0',
+          borderBottomLeftRadius: 10,
+          borderBottomRightRadius: 10,
+          overflow: 'hidden',
+        }}
+      >
         <Grid container spacing={2} justifyContent="center" alignItems="center">
           <Grid item xs={12}>
             <TextField
