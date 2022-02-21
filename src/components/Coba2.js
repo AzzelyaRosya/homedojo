@@ -23,14 +23,28 @@ const Img = styled('img')({
 function Coba2() {
   const [background, setBackground] = useState('#f2f2f2');
 
-  const setStyle = (background) => {
-    setBackground(background);
+  const [selectedData, setSelectedData] = useState([]);
+
+  const setStyle = (e) => {
+    console.log(e);
+    // setBackground(background);
+    let fselected = [...selectedData];
+    let selectedtrue = selectedData.includes(e);
+    console.log(fselected);
+
+    if (selectedtrue) {
+      let withoutdouble = fselected.filter((x) => x !== e);
+      setSelectedData(withoutdouble);
+    } else {
+      fselected.push(e);
+      setSelectedData(fselected);
+    }
   };
 
   return (
     <>
       {dummyData.map((data, index) => (
-        <Paper onClick={() => setStyle('#e6ffff')} key={index} elevation="3" sx={{ p: 1, margin: 'auto', maxWidth: 550, flexGrow: 1, borderRadius: 3, bgcolor: { background } }} style={{ marginBottom: 10 }}>
+        <Paper onClick={() => setStyle(index)} key={index} elevation="3" sx={{ p: 1, margin: 'auto', maxWidth: 550, flexGrow: 1, borderRadius: 3, bgcolor: `${selectedData.includes(index)} ? #000 : #f2f2f2` }} style={{ marginBottom: 10 }}>
           <FormGroup>
             <Grid container spacing={2}>
               <Grid item>

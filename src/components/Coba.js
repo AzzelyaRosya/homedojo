@@ -19,15 +19,6 @@ const MenuProps = {
   },
 };
 
-const blue = {
-  100: '#DAECFF',
-  200: '#99CCF3',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-  900: '#003A75',
-};
-
 const grey = {
   100: '#E7EBF0',
   200: '#E0E3E7',
@@ -47,8 +38,8 @@ const StyledButton = styled('button')(
   box-sizing: border-box;
   min-height: calc(1.5em + 22px);
   min-width: 320px;
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
+  background: #f5f5f5;
+  border: none;
   border-radius: 0.75em;
   margin: 0.5em;
   padding: 10px;
@@ -56,14 +47,8 @@ const StyledButton = styled('button')(
   line-height: 1.5;
   color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
 
-  &:hover {
-    background: ${theme.palette.mode === 'dark' ? '' : grey[100]};
-    border-color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
-  }
+  
 
-  &.${selectUnstyledClasses.focusVisible} {
-    outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
-  }
 
   &.${selectUnstyledClasses.expanded} {
     &::after {
@@ -76,9 +61,7 @@ const StyledButton = styled('button')(
     float: right;
   }
 
-  & img {
-    margin-right: 10px;
-  }
+ 
   `
 );
 
@@ -92,7 +75,7 @@ const StyledListbox = styled('ul')(
   min-width: 320px;
   max-height: 400px;
   background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
+  border: none;
   border-radius: 0.75em;
   color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
   overflow: auto;
@@ -112,8 +95,8 @@ const StyledOption = styled(OptionUnstyled)(
   }
 
   &.${optionUnstyledClasses.selected} {
-    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
-    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
   }
 
   &.${optionUnstyledClasses.highlighted} {
@@ -122,8 +105,8 @@ const StyledOption = styled(OptionUnstyled)(
   }
 
   &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
-    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
-    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
   }
 
   &.${optionUnstyledClasses.disabled} {
@@ -135,9 +118,7 @@ const StyledOption = styled(OptionUnstyled)(
     color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
   }
 
-  & img {
-    margin-right: 10px;
-  }
+ 
   `
 );
 
@@ -202,7 +183,24 @@ export default function UnstyledSelectRichOptions() {
             },
           }}
         >
-          <CustomSelect>
+          <CustomSelect
+            renderValue={(option) => {
+              if (option == null) {
+                return (
+                  <div style={{ display: 'flex', alignItems: 'center', marginTop: 10 }}>
+                    <IconButton>
+                      <box-icon type="solid" name="map" color="orange"></box-icon>
+                    </IconButton>
+                    <em style={{ color: 'grey' }}>Temukan Kota</em>
+                  </div>
+                );
+              }
+
+              return <span>{option.label}</span>;
+            }}
+            MenuProps={MenuProps}
+            inputProps={{ 'aria-label': 'Without label' }}
+          >
             {names.map((name) => (
               <StyledOption key={name} value={name} MenuProps={MenuProps} inputProps={{ 'aria-label': 'Without label' }}>
                 <IconButton>

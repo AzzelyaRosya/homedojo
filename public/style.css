@@ -132,3 +132,15 @@ table {
 .icon .btn {
   color: red;
 }
+
+/* tambahan untuk coba2 */
+
+.paper {
+  background: white;
+  border: 0 solid whitesmoke;
+}
+.paper:hover {
+  background: #f78104;
+  transition: 0.5s;
+  opacity: 0.8;
+}
