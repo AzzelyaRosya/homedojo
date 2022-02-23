@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import { Box, Tabs, Tab, Typography, Paper, FormGroup, Grid, ButtonBase } from '@mui/material';
+import { Box, Tabs, Tab, Typography, Paper, FormGroup, Grid, ButtonBase, TextField, InputAdornment } from '@mui/material';
 
 import lotsOfData from '../components/Data';
 
@@ -13,9 +13,13 @@ import Terpopuler from './Terpopuler';
 import Bandingkan from './Bandingkan';
 import Coba from '../components/Coba';
 
+// import lodash for filter
+import _ from 'lodash';
+
 // icon
 import StarIcon from '@mui/icons-material/Star';
 import { IconButton } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Img = styled('img')({
   margin: 'auto',
@@ -83,7 +87,7 @@ export default function Home() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChangey = (event, newValue) => {
     setValue(newValue);
   };
 
@@ -107,10 +111,83 @@ export default function Home() {
     }
   };
 
+  const [searchText, setSearchText] = useState('');
+  const [data, setData] = useState(lotsOfData);
+
+  // handle change event of search input
+  const handleChange = (value) => {
+    setSearchText(value);
+    filterData(value);
+  };
+
+  // filter records by search text
+  const filterData = (value) => {
+    var searchQuery = value.toString().toLowerCase();
+
+    let listdata = ['img', 'nama', 'desc', 'pelatih', 'harga', 'rating'].map((x, i) => {
+      return lotsOfData.filter((el) => {
+        if (el[x]) {
+          return el[x].toString().toLowerCase().indexOf(searchQuery) !== -1;
+        }
+      });
+    });
+
+    var dataset = _.maxBy(listdata, function (o) {
+      return o.length;
+    });
+    setData(dataset);
+  };
+
   return (
     <>
       {/* search */}
-      <Search />
+      {/* <Search /> */}
+      <Box
+        sx={{ p: 3 }}
+        style={{
+          backgroundColor: '#249EA0',
+          borderBottomLeftRadius: 10,
+          borderBottomRightRadius: 10,
+          overflow: 'hidden',
+        }}
+      >
+        <Grid container spacing={2} justifyContent="center" alignItems="center">
+          <Grid item xs={12}>
+            <TextField
+              value={searchText}
+              onChange={(e) => handleChange(e.target.value)}
+              align="center"
+              style={{ backgroundColor: '#fff', width: '100%', outline: 'none' }}
+              placeholder="Search"
+              size="small"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <IconButton>
+                      <SearchIcon sx={{ fontSize: 30 }} />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              sx={{
+                borderRadius: 5,
+                '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#249EA0',
+                  borderRadius: 5,
+                },
+                '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#249EA0',
+                  borderRadius: 5,
+                },
+                '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+                  border: 'none',
+                  borderRadius: 2,
+                },
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Box>
 
       {/* tabs */}
 
@@ -127,7 +204,7 @@ export default function Home() {
       {/* terdekat */}
       <TabPanel value={value} index={0}>
         <Terdekat />
-        {lotsOfData.map((x, index) => (
+        {data.map((x, index) => (
           <Paper onClick={() => setStyle(index)} elevation="3" sx={{ p: 1, margin: 'auto', maxWidth: 550, flexGrow: 1, borderRadius: 3, bgcolor: `${selectedData.includes(index)} ? #000 : #f2f2f2` }} style={{ marginBottom: 10 }}>
             <FormGroup>
               <Grid container spacing={2}>
@@ -188,7 +265,7 @@ export default function Home() {
       {/* terpopuler */}
       <TabPanel value={value} index={1}>
         <Terpopuler />
-        {lotsOfData.map((x, index) => (
+        {data.map((x, index) => (
           <Paper onClick={() => setStyle(index)} elevation="3" sx={{ p: 1, margin: 'auto', maxWidth: 550, flexGrow: 1, borderRadius: 3, bgcolor: `${selectedData.includes(index)} ? #000 : #f2f2f2` }} style={{ marginBottom: 10 }}>
             <FormGroup>
               <Grid container spacing={2}>
@@ -249,7 +326,7 @@ export default function Home() {
       {/* bandingkan */}
       <TabPanel value={value} index={2}>
         <Bandingkan />
-        {lotsOfData.map((x, index) => (
+        {data.map((x, index) => (
           <Paper onClick={() => setStyle(index)} elevation="3" sx={{ p: 1, margin: 'auto', maxWidth: 550, flexGrow: 1, borderRadius: 3, bgcolor: `${selectedData.includes(index)} ? #000 : #f2f2f2` }} style={{ marginBottom: 10 }}>
             <FormGroup>
               <Grid container spacing={2}>
