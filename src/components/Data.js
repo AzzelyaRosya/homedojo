@@ -5,6 +5,7 @@ import hotel4 from '../img/hotel4.jpg';
 
 const lotsOfData = [
   {
+    id: 1,
     img: hotel1,
     nama: 'Dojo Inkanas Sulsel',
     desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla varius consequat leo, non blandit metus aliquam at.',
@@ -13,6 +14,7 @@ const lotsOfData = [
     rating: '4.6',
   },
   {
+    id: 2,
     img: hotel2,
     nama: 'Terakoya Dojo',
     desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla varius consequat leo, non blandit metus aliquam at.',
@@ -21,6 +23,7 @@ const lotsOfData = [
     rating: '4.5',
   },
   {
+    id: 3,
     img: hotel3,
     nama: 'Aikido Shudokan Indonesia',
     desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla varius consequat leo, non blandit metus aliquam at.g',
@@ -29,6 +32,7 @@ const lotsOfData = [
     rating: '4.1',
   },
   {
+    id: 4,
     img: hotel4,
     nama: 'AT Karate Sport',
     desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla varius consequat leo, non blandit metus aliquam at.',
