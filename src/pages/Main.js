@@ -87,7 +87,7 @@ export default function Home() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
-  const handleChangey = (event, newValue) => {
+  const handleChangeTabs = (event, newValue) => {
     setValue(newValue);
   };
 
@@ -192,7 +192,7 @@ export default function Home() {
       {/* tabs */}
 
       <Box sx={{ mt: 3, fontWeight: 'bold' }}>
-        <StyledTabs value={value} onChange={handleChange} variant="fullWidth" aria-label="full width tabs example" centered>
+        <StyledTabs value={value} onChange={handleChangeTabs} variant="fullWidth" aria-label="full width tabs example" centered>
           <StyledTab label="Terdekat" {...a11yProps(0)} />
           <StyledTab label="Terpopuler" {...a11yProps(1)} />
           <StyledTab label="Bandingkan" {...a11yProps(2)} />
@@ -262,7 +262,6 @@ export default function Home() {
         ))}
       </TabPanel>
 
-      {/* terpopuler */}
       <TabPanel value={value} index={1}>
         <Terpopuler />
         {data.map((x, index) => (
