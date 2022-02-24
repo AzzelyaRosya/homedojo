@@ -1,6 +1,3 @@
-import Terdekat from './pages/Terdekat';
-import Terpopuler from './pages/Terpopuler';
-import Bandingkan from './pages/Bandingkan';
 import Peta from './pages/Peta';
 import Main from './pages/Main';
 

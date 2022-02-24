@@ -133,7 +133,7 @@ CustomSelect.propTypes = {
 
 const names = ['Bekasi, Jawa Barat', 'Jakarta, DKI Jakarta', 'Semarang, Jawa Tengah', 'Surabaya, Jawa Timur', 'Yogyakarta, Jawa Tengah', 'Cirebon, Jawa Barat', 'Bandung, Jawa Barat'];
 
-export default function Bandingkan() {
+export default function Expand() {
   const [kota, setPersonName] = React.useState([]);
 
   const onTabClicked = (event) => {

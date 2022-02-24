@@ -7,10 +7,7 @@ import { Box, Tabs, Tab, Typography, Paper, FormGroup, Grid, ButtonBase, TextFie
 import lotsOfData from '../components/Data';
 
 // import
-import Search from '../components/Search';
-import Terdekat from './Terdekat';
-import Terpopuler from './Terpopuler';
-import Bandingkan from './Bandingkan';
+import Expand from '../components/Expand';
 import Coba from '../components/Coba';
 
 // import lodash for filter
@@ -141,7 +138,6 @@ export default function Home() {
   return (
     <>
       {/* search */}
-      {/* <Search /> */}
       <Box
         sx={{ p: 3 }}
         style={{
@@ -203,7 +199,7 @@ export default function Home() {
 
       {/* terdekat */}
       <TabPanel value={value} index={0}>
-        <Terdekat />
+        <Expand />
         {data.map((x, index) => (
           <Paper onClick={() => setStyle(index)} elevation="3" sx={{ p: 1, margin: 'auto', maxWidth: 550, flexGrow: 1, borderRadius: 3, bgcolor: `${selectedData.includes(index)} ? #000 : #f2f2f2` }} style={{ marginBottom: 10 }}>
             <FormGroup>
@@ -263,7 +259,7 @@ export default function Home() {
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <Terpopuler />
+        <Expand />
         {data.map((x, index) => (
           <Paper onClick={() => setStyle(index)} elevation="3" sx={{ p: 1, margin: 'auto', maxWidth: 550, flexGrow: 1, borderRadius: 3, bgcolor: `${selectedData.includes(index)} ? #000 : #f2f2f2` }} style={{ marginBottom: 10 }}>
             <FormGroup>
@@ -324,7 +320,7 @@ export default function Home() {
 
       {/* bandingkan */}
       <TabPanel value={value} index={2}>
-        <Bandingkan />
+        <Expand />
         {data.map((x, index) => (
           <Paper onClick={() => setStyle(index)} elevation="3" sx={{ p: 1, margin: 'auto', maxWidth: 550, flexGrow: 1, borderRadius: 3, bgcolor: `${selectedData.includes(index)} ? #000 : #f2f2f2` }} style={{ marginBottom: 10 }}>
             <FormGroup>
@@ -384,7 +380,8 @@ export default function Home() {
       </TabPanel>
 
       <TabPanel value={value} index={3}>
-        <Coba />
+        <Expand />
+        {/* <Coba /> */}
       </TabPanel>
     </>
   );
