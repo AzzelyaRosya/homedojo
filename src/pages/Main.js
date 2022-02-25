@@ -93,14 +93,15 @@ export default function Home() {
   const [selectedData, setSelectedData] = useState([]);
 
   const setStyle = (e) => {
-    console.log(e);
+    console.log(selectedData);
+    // setSelectedData(e);
     // setBackground(background);
     let fselected = [...selectedData];
-    let selectedtrue = selectedData.includes(e);
+    let selectedtrue = selectedData.filter((x) => x.id === e.id);
     console.log(fselected);
 
-    if (selectedtrue) {
-      let withoutdouble = fselected.filter((x) => x !== e);
+    if (selectedtrue.length > 0) {
+      let withoutdouble = fselected.filter((x) => x.id !== e.id);
       setSelectedData(withoutdouble);
     } else {
       fselected.push(e);
@@ -201,128 +202,12 @@ export default function Home() {
       <TabPanel value={value} index={0}>
         <Expand />
         {data.map((x, index) => (
-          <Paper onClick={() => setStyle(index)} elevation="3" sx={{ p: 1, margin: 'auto', maxWidth: 550, flexGrow: 1, borderRadius: 3, bgcolor: `${selectedData.includes(index)} ? #000 : #f2f2f2` }} style={{ marginBottom: 10 }}>
-            <FormGroup>
-              <Grid container spacing={2}>
-                <Grid item>
-                  <ButtonBase
-                    sx={{ width: 200, height: 200 }}
-                    style={{
-                      //border radius img
-                      borderBottomLeftRadius: 10,
-                      borderBottomRightRadius: 10,
-                      borderTopRightRadius: 10,
-                      borderTopLeftRadius: 10,
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <Img src={x.img} />
-                  </ButtonBase>
-                </Grid>
-                <Grid item xs={12} sm container>
-                  <Grid item xs container direction="column" spacing={2}>
-                    <Grid item xs container direction="row">
-                      {/* Judul */}
-                      <Grid item xs>
-                        <Typography gutterBottom variant="subtitle1" component="div" sx={{ fontWeight: 'bold', fontSize: '19px' }}>
-                          {x.nama}
-                        </Typography>
-                      </Grid>
-
-                      {/* Harga */}
-                      <Grid item>
-                        <Typography variant="subtitle1" component="div" sx={{ fontSize: '15px', fontWeight: 'bold' }}>
-                          <IconButton sx={{ fontSize: '8px', color: 'orange' }}>
-                            <StarIcon />
-                          </IconButton>
-                          {x.rating}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                    <Grid item>
-                      <Typography sx={{ fontSize: '14px', mt: -3 }} variant="body2" gutterBottom color="text.secondary">
-                        {x.desc}
-                      </Typography>
-                      <Typography sx={{ color: ' #249EA0', fontWeight: 'bold', mt: 3, fontSize: '16px' }} variant="body2">
-                        {x.pelatih}
-                      </Typography>
-                      <Typography flexDirection={'row'} sx={{ cursor: 'pointer', color: '#F78104', fontSize: '21px', fontWeight: 'bold', mt: 2 }} variant="body2">
-                        {x.harga}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </FormGroup>
-          </Paper>
-        ))}
-      </TabPanel>
-
-      <TabPanel value={value} index={1}>
-        <Expand />
-        {data.map((x, index) => (
-          <Paper onClick={() => setStyle(index)} elevation="3" sx={{ p: 1, margin: 'auto', maxWidth: 550, flexGrow: 1, borderRadius: 3, bgcolor: `${selectedData.includes(index)} ? #000 : #f2f2f2` }} style={{ marginBottom: 10 }}>
-            <FormGroup>
-              <Grid container spacing={2}>
-                <Grid item>
-                  <ButtonBase
-                    sx={{ width: 200, height: 200 }}
-                    style={{
-                      //border radius img
-                      borderBottomLeftRadius: 10,
-                      borderBottomRightRadius: 10,
-                      borderTopRightRadius: 10,
-                      borderTopLeftRadius: 10,
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <Img src={x.img} />
-                  </ButtonBase>
-                </Grid>
-                <Grid item xs={12} sm container>
-                  <Grid item xs container direction="column" spacing={2}>
-                    <Grid item xs container direction="row">
-                      {/* Judul */}
-                      <Grid item xs>
-                        <Typography gutterBottom variant="subtitle1" component="div" sx={{ fontWeight: 'bold', fontSize: '19px' }}>
-                          {x.nama}
-                        </Typography>
-                      </Grid>
-
-                      {/* Harga */}
-                      <Grid item>
-                        <Typography variant="subtitle1" component="div" sx={{ fontSize: '15px', fontWeight: 'bold' }}>
-                          <IconButton sx={{ fontSize: '8px', color: 'orange' }}>
-                            <StarIcon />
-                          </IconButton>
-                          {x.rating}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                    <Grid item>
-                      <Typography sx={{ fontSize: '14px', mt: -3 }} variant="body2" gutterBottom color="text.secondary">
-                        {x.desc}
-                      </Typography>
-                      <Typography sx={{ color: ' #249EA0', fontWeight: 'bold', mt: 3, fontSize: '16px' }} variant="body2">
-                        {x.pelatih}
-                      </Typography>
-                      <Typography flexDirection={'row'} sx={{ cursor: 'pointer', color: '#F78104', fontSize: '21px', fontWeight: 'bold', mt: 2 }} variant="body2">
-                        {x.harga}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </FormGroup>
-          </Paper>
-        ))}
-      </TabPanel>
-
-      {/* bandingkan */}
-      <TabPanel value={value} index={2}>
-        <Expand />
-        {data.map((x, index) => (
-          <Paper onClick={() => setStyle(index)} elevation="3" sx={{ p: 1, margin: 'auto', maxWidth: 550, flexGrow: 1, borderRadius: 3, bgcolor: `${selectedData.includes(index)} ? #000 : #f2f2f2` }} style={{ marginBottom: 10 }}>
+          <Paper
+            onClick={() => setStyle(x)}
+            elevation="3"
+            sx={{ p: 1, margin: 'auto', maxWidth: 550, flexGrow: 1, borderRadius: 3, bgcolor: `${selectedData.filter((item) => item.id === x.id).length > 0 ? '#e6ffff' : '#fff'}` }}
+            style={{ marginBottom: 10 }}
+          >
             <FormGroup>
               <Grid container spacing={2}>
                 <Grid item>
